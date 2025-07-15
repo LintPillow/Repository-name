@@ -57,7 +57,6 @@ Spring BootとAWSを使って、ログイン・打刻・管理画面などを備
         - `id`：ログインID（自動生成、例：250XXXX）
         - `username`：ユーザー名（表示用）
         - `password`：ハッシュ化済みパスワード
-        - `role`：`USER` または `ADMIN`
 
     - 出勤打刻(Arrival)
         - `id`：打刻ID（PK）
