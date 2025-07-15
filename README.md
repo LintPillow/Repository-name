@@ -38,17 +38,17 @@ Spring BootとAWSを使って、ログイン・打刻・管理画面などを備
 
 
 4. 開発環境・技術スタック
-- 使用言語：Java
+    - 使用言語：Java
 
-- フレームワーク：Spring Boot
+    - フレームワーク：Spring Boot
 
-- テンプレートエンジン：Thymeleaf
+    - テンプレートエンジン：Thymeleaf
 
-- データベース：H2（開発時のみ）。将来的にMySQLまたはAWS RDSを想定
+    - データベース：H2（開発時のみ）。将来的にMySQLまたはAWS RDSを想定
 
-- バージョン管理：Git（GitHubを使用）
+    - バージョン管理：Git（GitHubを使用）
 
-- デプロイ先：AWS
+    - デプロイ先：AWS
 
 
 5. データモデル(仮)
