@@ -23,8 +23,4 @@ Thumbs.db
 # Maven
 /target/
 
-# Spring Boot specific
-*.db
-*.h2.db
-application.properties
-application.yml
+
