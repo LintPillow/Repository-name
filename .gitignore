@@ -1,26 +1,18 @@
-# Java
+# Java build files
 *.class
-*.jar
-*.war
-*.log
-*.iml
+/target/
 
-# IDEs
+# IDE settings
+*.iml
 .idea/
-*.iws
-*.ipr
-*.iml
 .vscode/
+.project
+.classpath
+.settings/
 
-# OS
+# OS-specific files
 .DS_Store
 Thumbs.db
 
-# Gradle
-/build/
-/.gradle/
-
-# Maven
-/target/
-
-
+# Log files
+*.log
