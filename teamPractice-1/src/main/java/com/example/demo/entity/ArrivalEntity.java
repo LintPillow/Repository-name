@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.security.Timestamp;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,5 +25,6 @@ public class ArrivalEntity {
 //	ユーザー名
 	private String user_name;
 //	出勤時間
-	private Timestamp dateTime;
+	@Column(name = "date_time", columnDefinition = "TIMESTAMP")
+	private Timestamp date_Time;
 }
