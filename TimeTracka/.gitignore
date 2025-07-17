@@ -1,33 +1,26 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# === ビルド成果物 ===
+/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# === Eclipse関連ファイル（共有前提なら除外しない）===
+# .project
+# .classpath
+# .settings/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# === IDEA（IntelliJ）ユーザー向けの保険 ===
+.idea/
 *.iml
-*.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# === OS由来のゴミファイル ===
+.DS_Store
+Thumbs.db
 
-### VS Code ###
-.vscode/
+# === ログファイル ===
+*.log
+
+# === 環境依存の設定や一時ファイル ===
+*.tmp
+*.bak
+
+# === Javaコンパイル済みファイル（念のため） ===
+*.class
+/.metadata/
