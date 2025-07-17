@@ -1,14 +1,25 @@
-# ビルド成果物
+# === ビルド成果物 ===
 /target/
 
-# Mavenラッパーはコミット推奨
-# /mvnw
-# /mvnw.cmd
+# === Eclipse関連ファイル（共有前提なら除外しない）===
+# .project
+# .classpath
+# .settings/
 
-# 一般的なIDEキャッシュ無視
+# === IDEA（IntelliJ）ユーザー向けの保険 ===
 .idea/
 *.iml
 
-# OSごみ
+# === OS由来のゴミファイル ===
 .DS_Store
 Thumbs.db
+
+# === ログファイル ===
+*.log
+
+# === 環境依存の設定や一時ファイル ===
+*.tmp
+*.bak
+
+# === Javaコンパイル済みファイル（念のため） ===
+*.class
