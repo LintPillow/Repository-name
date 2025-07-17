@@ -1,21 +1,14 @@
-# Java build files
-*.class
+# ビルド成果物
 /target/
 
-# IDE settings
-*.iml
-.idea/
-.vscode/
-.project
-.classpath
-.settings/
+# Mavenラッパーはコミット推奨
+# /mvnw
+# /mvnw.cmd
 
-# OS-specific files
+# 一般的なIDEキャッシュ無視
+.idea/
+*.iml
+
+# OSごみ
 .DS_Store
 Thumbs.db
-
-# Log files
-*.log
-
-#other
-**/.metadata/
