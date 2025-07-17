@@ -1,32 +1,44 @@
 package com.example.demo.entity;
 
-import java.security.Timestamp;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-import lombok.Data;
 
 @Entity
-@Table(name = "arrivals")
-@Data
-
-//出勤打刻Entity
 public class ArrivalEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//	打刻id
 	private Long id;
-	//	ユーザー名
-	private String user_name;
+	private String userName;
+	private LocalDateTime timestamp;
 
-  //	出勤時間
-	@Column(name = "date_time", columnDefinition = "TIMESTAMP")
-	private Timestamp date_Time;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
 
 }
