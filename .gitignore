@@ -18,4 +18,4 @@ Thumbs.db
 *.log
 
 #other
-.metadata/
+**/.metadata/
