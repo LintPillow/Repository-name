@@ -18,7 +18,7 @@ public class DepartureEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	private String user_name;
 	private Timestamp dateTime;
 }

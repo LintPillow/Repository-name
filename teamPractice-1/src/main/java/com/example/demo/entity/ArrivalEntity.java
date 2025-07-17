@@ -20,7 +20,7 @@ public class ArrivalEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	//	打刻id
-	private int id;
+	private Long id;
 	//	ユーザー名
 	private String user_name;
 	//	出勤時間
