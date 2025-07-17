@@ -20,11 +20,13 @@ public class ArrivalEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	打刻id
+	//	打刻id
 	private int id;
-//	ユーザー名
+	//	ユーザー名
 	private String user_name;
-//	出勤時間
+
+  //	出勤時間
 	@Column(name = "date_time", columnDefinition = "TIMESTAMP")
 	private Timestamp date_Time;
+
 }

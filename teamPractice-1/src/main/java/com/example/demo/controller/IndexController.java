@@ -2,5 +2,5 @@ package com.example.demo.controller;
 
 public class IndexController {
 
-//	ダミーcontrollerクラス
+	//	ダミーcontrollerクラス
 }
