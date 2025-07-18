@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者画面</title>
+    <style>
+        /* ボタンを横並びにするためのスタイル */
+        .button-container {
+            display: inline-block;
+            margin-right: 10px; /* ボタンの間にスペースを入れる */
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin</h1>
+   
+    <!-- 検索フォーム（名前検索と日時検索） -->
+    <tr>
+        <th><input type="text" placeholder="名前"></th>
+        <th><input type="text" placeholder="日付"></th>
+        <th><input type="button" value="実行"></th>
+    </tr>
+   
+    <!-- データテーブル -->
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>出勤時間</th>
+            <th>退勤時間</th>
+            <th>勤務時間</th>
+            <th>出勤日数</th>
+            <th>操作</th> <!-- 編集・削除ボタンの列を一番右に追加 -->
+        </tr>
+       
+        <tr th:each="arrival_list : ${arrivalDb}">
+            <td th:text="${arrival_list.id}"></td>
+            <td th:text="${arrival_list.name}"></td>
+            <td th:text="${#dates.format(arrival_list.clockIn, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#dates.format(arrival_list.clockOut, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${arrival_list.workTime.toHours()} + '時間'"></td>
+            <td th:text="${arrival_list.workDays}"></td>
+ 
+            <!-- 編集ボタンと削除ボタンを横並びに配置 -->
+            <td>
+                <div class="button-container">
+                    <form th:action="@{/edit/{id}(id=${arrival_list.id})}">
+                        <input type="submit" value="編集">
+                    </form>
+                </div>
+                <div class="button-container">
+                    <form th:action="@{/del/{id}(id=${arrival_list.id})}">
+                        <input type="submit" value="削除">
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
