@@ -23,6 +23,13 @@ public class PunchController {
 	@Autowired
 	private DepartureRepository departureRepository;
 
+	// 打刻ページの表示
+	@GetMapping("/")
+	public String showPunchForm(Model model) {
+		model.addAttribute("timestamp", LocalDateTime.now());
+		return "punch/punchIndex";
+	}
+
 	@PostMapping("/")
 	public String submitPunch(@RequestParam("userName") String userName, @RequestParam("action") String action,
 			Model model) {
