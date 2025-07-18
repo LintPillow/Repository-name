@@ -1,1 +1,27 @@
-punchdayo
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+
+</head>
+
+<body>
+	<H1>打刻画面</H1>
+	<p>現在時刻</p><span th:text="${timestamp}"></span>
+	<input type="text" name="userName" placeholder="君の名は">
+	<form th:action="@{/punch/arrival}" method="post">
+		<label><input type="submit" name="syukkin" value="出勤"></label></br>
+	</form>
+
+	<form method="post">
+		<label><input type="submit"th:action="@{/punch/departure}" name="taikin" value="退勤"></label>
+	</form>
+</body>
+
+</html>
+
+
+
+
