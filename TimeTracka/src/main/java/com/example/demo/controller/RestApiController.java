@@ -29,7 +29,7 @@ public class RestApiController {
 		return dummyList;
 	}
 	
-	出発時刻のdummyデータをgetするAPIcontroller
+	//出発時刻のdummyデータをgetするAPIcontroller
 	@GetMapping("/api/departures/dummy")
 	public List<Map<String, Object>> showPunchDummyDeparturesForm() {
 		
