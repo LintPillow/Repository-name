@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,8 @@ public class DepartureEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(name = "USERNAME")
 	private String userName;
-	@Column(name = "date_time", columnDefinition = "TIMESTAMP")
+	@Column(name = "timestamp", columnDefinition = "TIMESTAMP")
 	private LocalDateTime timestamp;
 }
