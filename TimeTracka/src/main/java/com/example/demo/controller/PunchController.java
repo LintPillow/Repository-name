@@ -23,11 +23,6 @@ public class PunchController {
 	@Autowired
 	private DepartureRepository departureRepository;
 
-	@GetMapping("/")
-	public String showPunchForm() {
-		return "punch/punchIndex";
-	}
-
 	// 打刻ページの表示
 	@PostMapping("/")
 	public String submitPunch(@RequestParam("userName") String userName, @RequestParam("action") String action,
