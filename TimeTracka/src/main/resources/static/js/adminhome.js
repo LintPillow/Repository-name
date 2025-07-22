@@ -1,10 +1,18 @@
+// グローバル変数
+let arrivals = [];
+let departures = [];
+
+// データを取得して表示する関数
 function fetchAndMergeData(arrivalsUrl, departuresUrl, tableId) {
     // APIから出勤と退勤データを非同期に取得
     Promise.all([
         fetch(arrivalsUrl).then(res => res.json()),  // 出勤データ
         fetch(departuresUrl).then(res => res.json()) // 退勤データ
     ])
-    .then(([arrivals, departures]) => {
+    .then(([arrivalsData, departuresData]) => {
+        arrivals = arrivalsData;  // グローバル変数に格納
+        departures = departuresData;  // グローバル変数に格納
+
         const tableBody = document.querySelector(`#${tableId} tbody`);
         tableBody.innerHTML = ""; // テーブルを初期化
 
@@ -30,6 +38,11 @@ function fetchAndMergeData(arrivalsUrl, departuresUrl, tableId) {
             const nameCell = document.createElement("td");
             nameCell.textContent = item.userName;
             row.appendChild(nameCell);
+
+            // 日付
+            const dateCell = document.createElement("td");
+            dateCell.textContent = date;
+            row.appendChild(dateCell);
 
             // 出勤時間
             const arrivalCell = document.createElement("td");
@@ -92,3 +105,70 @@ function fetchAndMergeData(arrivalsUrl, departuresUrl, tableId) {
 window.onload = function () {
     fetchAndMergeData("/api/arrivals", "/api/departures", "attendance-table");
 };
+
+// 検索機能
+function searchData() {
+    const nameSearch = document.getElementById('nameSearch').value.toLowerCase(); // 名前検索
+    const dateSearch = document.getElementById('dateSearch').value; // 日付検索
+
+    // 検索結果を保持する配列
+    const filteredArrivals = arrivals.filter(item => {
+        const [date, time] = item.timestamp.split("T"); // タイムスタンプを分割
+        // 名前と日付でフィルタリング
+        const matchesName = nameSearch ? item.userName.toLowerCase().includes(nameSearch) : true;
+        const matchesDate = dateSearch ? date.includes(dateSearch) : true;
+
+        return matchesName && matchesDate; // 両方の条件を満たす場合にtrue
+    });
+
+    // 検索結果を表示
+    displayData(filteredArrivals, departures);
+}
+
+// 検索結果を表示する関数
+function displayData(arrivals, departures) {
+    const tableBody = document.querySelector('#attendance-table tbody');
+    tableBody.innerHTML = ""; // 既存の行をクリア
+
+    arrivals.forEach(item => {
+        const [date, arrivalTime] = item.timestamp.split("T");
+       
+
+        const row = document.createElement('tr');
+
+        // 名前
+        const nameCell = document.createElement('td');
+        nameCell.textContent = item.userName;
+        row.appendChild(nameCell);
+
+        // 日付
+        const dateCell = document.createElement('td');
+        dateCell.textContent = date;
+        row.appendChild(dateCell);
+
+        // 出勤時間
+        const arrivalCell = document.createElement('td');
+        arrivalCell.textContent = arrivalTime;
+        row.appendChild(arrivalCell);
+
+        // 退勤時間
+        const departureCell = document.createElement('td');
+        departureCell.textContent = departureTime;
+        row.appendChild(departureCell);
+
+        // 勤務時間
+        const workTimeCell = document.createElement('td');
+        const arrivalDateTime = new Date(`${date}T${arrivalTime}`);
+        const departureDateTime = departureTime !== '-' ? new Date(`${date}T${departureTime}`) : null;
+        const workTimeStr = departureDateTime ? `${Math.floor((departureDateTime - arrivalDateTime) / 1000 / 60 / 60)}時間 ${(departureDateTime - arrivalDateTime) / 1000 / 60 % 60}分` : "-";
+        workTimeCell.textContent = workTimeStr;
+        row.appendChild(workTimeCell);
+
+        // 勤務日数
+        const workDaysCell = document.createElement('td');
+        workDaysCell.textContent = "-";
+        row.appendChild(workDaysCell);
+
+        tableBody.appendChild(row);
+    });
+}

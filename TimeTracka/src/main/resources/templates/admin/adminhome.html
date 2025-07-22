@@ -21,12 +21,11 @@
 <body>
     <h1>Admin</h1>
    
-    <!-- 検索フォーム（名前検索と日時検索） -->
-    <tr>
-        <th><input type="text" placeholder="名前"></th>
-        <th><input type="text" placeholder="日付"></th>
-        <th><input type="button" value="実行"></th>
-    </tr>
+	<div>
+	    <input type="text" id="nameSearch" placeholder="名前で検索" />
+	    <input type="text" id="dateSearch" placeholder="日付で検索 (例: 2025-07-15)" />
+	    <button onclick="searchData()">検索</button>
+	</div>
    
 
 
@@ -35,6 +34,7 @@
 	    <thead>
 	        <tr>
 	            <th>名前</th>
+				<th>日付</th>
 	            <th>出勤時間</th>
 	            <th>退勤時間</th>
 	            <th>勤務時間</th>
