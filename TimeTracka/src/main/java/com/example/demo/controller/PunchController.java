@@ -23,29 +23,41 @@ public class PunchController {
 	@Autowired
 	private DepartureRepository departureRepository;
 
-	// 打刻ページの表示
 	@GetMapping("/")
-	public String showPunchForm(Model model) {
-		model.addAttribute("timestamp", LocalDateTime.now());
+	public String showPunchForm() {
 		return "punch/punchIndex";
 	}
 
+	// 打刻ページの表示
 	@PostMapping("/")
 	public String submitPunch(@RequestParam("userName") String userName, @RequestParam("action") String action,
 			Model model) {
 
+		// バリデーション：名前が空 / null の場合はエラー表示
+		if (userName == null || userName.trim().isEmpty()) {
+			model.addAttribute("error", "名前を入力してください");
+			return "punch/punchIndex";
+		}
+
 		LocalDateTime now = LocalDateTime.now();
 
-		if ("arrival".equals(action)) {
+		switch (action) {
+		case "arrival" -> {
 			ArrivalEntity arrival = new ArrivalEntity();
 			arrival.setUserName(userName);
 			arrival.setTimestamp(now);
 			arrivalRepository.save(arrival);
-		} else if ("departure".equals(action)) {
+		}
+		case "departure" -> {
 			DepartureEntity departure = new DepartureEntity();
 			departure.setUserName(userName);
 			departure.setTimestamp(now);
 			departureRepository.save(departure);
+		}
+		default -> {
+			model.addAttribute("error", "不正な操作です");
+			return "punch/punchIndex";
+		}
 		}
 
 		model.addAttribute("userName", userName);
