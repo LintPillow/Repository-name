@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,6 @@ public class PunchController {
 	@Autowired
 	private DepartureRepository departureRepository;
 
-	// 打刻ページの表示
 	@GetMapping("/")
 	public String showPunchForm(Model model) {
 		model.addAttribute("timestamp", LocalDateTime.now());
@@ -32,29 +32,62 @@ public class PunchController {
 
 	@PostMapping("/")
 	public String submitPunch(@RequestParam("userName") String userName, @RequestParam("action") String action,
-			Model model) {
+			@RequestParam(value = "forceType", required = false) String forceType, Model model) {
 
-		// バリデーション：名前が空 / null の場合はエラー表示
 		if (userName == null || userName.trim().isEmpty()) {
 			model.addAttribute("error", "名前を入力してください");
+			model.addAttribute("userName", userName);
 			return "punch/punchIndex";
 		}
 
-		LocalDateTime now = LocalDateTime.now().withNano(0); // ミリ秒以下カット
+		LocalDateTime now = LocalDateTime.now().withNano(0);
+		LocalDateTime startOfDay = now.toLocalDate().atStartOfDay();
+		LocalDateTime endOfDay = startOfDay.plusDays(1);
+
+		boolean wasOverwritten = false;
 
 		switch (action) {
 		case "arrival" -> {
-			ArrivalEntity arrival = new ArrivalEntity();
+			Optional<ArrivalEntity> existing = arrivalRepository.findByUserNameAndDate(userName, startOfDay, endOfDay);
+
+			if (existing.isPresent() && !"arrival".equals(forceType)) {
+				model.addAttribute("error", "本日はすでに出勤打刻されています。上書きする場合は再度出勤ボタンを押してください");
+				model.addAttribute("userName", userName);
+				model.addAttribute("forceType", "arrival");
+				return "punch/punchIndex";
+			}
+
+			ArrivalEntity arrival = existing.orElse(new ArrivalEntity());
 			arrival.setUserName(userName);
 			arrival.setTimestamp(now);
 			arrivalRepository.save(arrival);
+
+			if (existing.isPresent()) {
+				wasOverwritten = true;
+			}
 		}
+
 		case "departure" -> {
-			DepartureEntity departure = new DepartureEntity();
+			Optional<DepartureEntity> existing = departureRepository.findByUserNameAndDate(userName, startOfDay,
+					endOfDay);
+
+			if (existing.isPresent() && !"departure".equals(forceType)) {
+				model.addAttribute("error", "本日はすでに退勤打刻されています。上書きする場合は再度退勤ボタンを押してください");
+				model.addAttribute("userName", userName);
+				model.addAttribute("forceType", "departure");
+				return "punch/punchIndex";
+			}
+
+			DepartureEntity departure = existing.orElse(new DepartureEntity());
 			departure.setUserName(userName);
 			departure.setTimestamp(now);
 			departureRepository.save(departure);
+
+			if (existing.isPresent()) {
+				wasOverwritten = true;
+			}
 		}
+
 		default -> {
 			model.addAttribute("error", "不正な操作です");
 			return "punch/punchIndex";
@@ -63,13 +96,7 @@ public class PunchController {
 
 		model.addAttribute("userName", userName);
 		model.addAttribute("timestamp", now);
+		model.addAttribute("wasOverwritten", "打刻情報を上書きしました"); // 完了画面で使用可能
 		return "punch/punchCompletion";
 	}
-
-	//
-	// // (任意)
-	// @GetMapping("/punch/completion")
-	// public String showCompletionPage() {
-	// return "punch/punchCompletion";
-	// }
 }
