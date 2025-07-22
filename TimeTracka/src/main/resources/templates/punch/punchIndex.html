@@ -10,13 +10,10 @@
 <body>
 	<H1>打刻画面</H1>
 	<p>現在時刻</p><span th:text="${timestamp}"></span>
-	<input type="text" name="userName" placeholder="君の名は">
-	<form th:action="@{/punch/arrival}" method="post">
-		<label><input type="submit" name="syukkin" value="出勤"></label></br>
-	</form>
-
-	<form method="post">
-		<label><input type="submit"th:action="@{/punch/departure}" name="taikin" value="退勤"></label>
+	<br th:action="@{/punch/arrival}" method="post">
+		<input type="text" name="userName" placeholder="君の名は"></br>
+		<button type="submit" name="action" value="arrival">出勤</button>
+		<button type="submit" name="action" value="departure">退勤</button>
 	</form>
 </body>
 
