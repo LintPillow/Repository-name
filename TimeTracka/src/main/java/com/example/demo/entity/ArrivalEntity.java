@@ -29,5 +29,4 @@ public class ArrivalEntity {
 	// 出勤時間
 	@Column(name = "timestamp", columnDefinition = "TIMESTAMP")
 	private LocalDateTime timestamp;
-
 }

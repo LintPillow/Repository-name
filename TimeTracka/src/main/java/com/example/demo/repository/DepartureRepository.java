@@ -1,8 +1,19 @@
 package com.example.demo.repository;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.example.demo.entity.DepartureEntity;
 
 public interface DepartureRepository extends JpaRepository<DepartureEntity, Long> {
+	@Query("SELECT d FROM DepartureEntity d WHERE d.userName = :userName AND d.timestamp BETWEEN :start AND :end")
+	Optional<DepartureEntity> findByUserNameAndDate(
+			@Param("userName") String userName,
+			@Param("start") LocalDateTime start,
+			@Param("end") LocalDateTime end);
+
 }

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
-
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" th:href="@{/css/punch.css}">
 <title>打刻完了画面</title>
 </head>
-<h1>打刻完了</h1>
-<p th:text="'名前: ' + ${userName}"></p>
-<p th:text="'時刻: ' + ${#temporals.format(timestamp, 'yyyy-MM-dd HH:mm:ss')}"></p>
 
 <body>
+	<h1>打刻完了</h1>
+	<p th:if="${wasOverwritten}" style="color: red;">※ 既存の打刻を上書きしました</p>
+	<p th:text="'名前: ' + ${userName}"></p>
+	<p class="timestamp" th:text="'時刻: ' + ${#temporals.format(timestamp, 'yyyy-MM-dd HH:mm:ss')}"></p>
 </body>
-
 </html>

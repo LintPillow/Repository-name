@@ -2,33 +2,41 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>打刻画面</title>
+<link rel="stylesheet" th:href="@{/css/punch.css}">
 
 </head>
 
 <body>
-<script>
-	  function updateClock() {
-	    const now = new Date()
-	    const formatted = now.toLocaleString("ja-JP", {
-	      hour12: false
-	    })
-	    document.getElementById("clock").textContent = formatted
-	  }
+	<script>
+		function updateClock() {
+			const now = new Date()
+			const formatted = now.toLocaleString("ja-JP", {
+				hour12 : false
+			})
+			document.getElementById("clock").textContent = formatted
+		}
 
-	  setInterval(updateClock, 1000)
-	  updateClock()
+		setInterval(updateClock, 1000)
+		updateClock()
 	</script>
-	 
+
 	<H1>打刻画面</H1>
-	<p>現在時刻</p><div id="clock"></div>
-<!--	<span th:text="${timestamp}"></span>-->
+	<p>現在時刻</p>
+	<div id="clock" class="timestamp"></div>
 	<form th:action="@{/}" method="post">
-		<input type="text" name="userName" placeholder="君の名は"></br>
+		<input type="text" name="userName" placeholder="名前を入力" th:value="${userName}">
+		<input type="hidden" name="forceType" th:value="${forceType}">
 		<button type="submit" name="action" value="arrival">出勤</button>
 		<button type="submit" name="action" value="departure">退勤</button>
 	</form>
+
+	<script>
+		if (window.location.search.includes("retry=true")) {
+			document.getElementById("forceFlag").value = "true";
+		}
+	</script>
 	<!-- エラーメッセージを表示 -->
 	<p th:if="${error}" th:text="${error}" style="color: red;"></p>
 </body>
