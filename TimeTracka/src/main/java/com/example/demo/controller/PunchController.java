@@ -23,12 +23,13 @@ public class PunchController {
 	@Autowired
 	private DepartureRepository departureRepository;
 
+	// 打刻ページの表示
 	@GetMapping("/")
-	public String showPunchForm() {
+	public String showPunchForm(Model model) {
+		model.addAttribute("timestamp", LocalDateTime.now());
 		return "punch/punchIndex";
 	}
 
-	// 打刻ページの表示
 	@PostMapping("/")
 	public String submitPunch(@RequestParam("userName") String userName, @RequestParam("action") String action,
 			Model model) {
@@ -39,7 +40,7 @@ public class PunchController {
 			return "punch/punchIndex";
 		}
 
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now().withNano(0); // ミリ秒以下カット
 
 		switch (action) {
 		case "arrival" -> {
