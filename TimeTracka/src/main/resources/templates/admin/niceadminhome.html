@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <script type="text/javascript" th:src="@{js/jquery-3.7.1.min.js}"></script>-->
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script type="text/javascript" th:src="@{js/niceadminhome.js}"></script>
+<title>管理者画面</title>
+<style>
+/* ボタンを横並びにするためのスタイル */
+.button-container {
+	display: inline-block;
+	margin-right: 10px; /* ボタンの間にスペースを入れる */
+}
+</style>
+</head>
+<body>
+	<h1>Admin</h1>
+
+	<div>
+		<label for="nameSearch">名前で検索:</label> <input type="text"
+			id="nameSearch" placeholder="例: 山田太郎"> <label
+			for="dateSearch">日付で検索:</label> <input type="date" id="dateSearch">
+		<button onclick="filterTable()">検索</button>
+		<button onclick="resetFilter()">リセット</button>
+	</div>
+
+
+
+	<h1>勤務時間管理</h1>
+	<table id="attendance-table">
+		<thead>
+			<tr>
+				<th>名前</th>
+				<th>日付</th>
+				<th>出勤</th>
+				<th>退勤</th>
+				<th>勤務時間</th>
+				<th>編集</th>
+				<th>削除</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>

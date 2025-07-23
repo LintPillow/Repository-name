@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" th:src="@{/js/niceadminedit.js}"></script>
+<title>勤怠編集</title>
+</head>
+<body>
+	<h2>勤怠編集</h2>
+
+	<form id="edit-form">
+		<input type="hidden" id="userName"> <input type="hidden"
+			id="date">
+
+		<div>
+			<label for="arrivalTime">出勤時間:</label> <input type="time"
+				id="arrivalTime" name="arrivalTime">
+		</div>
+
+		<div>
+			<label for="departureTime">退勤時間:</label> <input type="time"
+				id="departureTime" name="departureTime">
+		</div>
+
+		<button type="button" onclick="submitEdit()">反映</button>
+		<button type="button" onclick="goBack()">戻る</button>
+	</form>
+
+	<script>
+		window.onload = function () {
+			const params = new URLSearchParams(window.location.search);
+			document.getElementById("userName").value = params.get("userName");
+			document.getElementById("date").value = params.get("date");
+
+			// 初期表示のために入力値もセットしたいならここで補完
+			if (params.get("arrivalTime")) {
+				document.getElementById("arrivalTime").value = params.get("arrivalTime");
+			}
+			if (params.get("departureTime")) {
+				document.getElementById("departureTime").value = params.get("departureTime");
+			}
+		};
+
+		function submitEdit() {
+			const userName = document.getElementById("userName").value;
+			const date = document.getElementById("date").value;
+			const arrivalTime = document.getElementById("arrivalTime").value;
+			const departureTime = document.getElementById("departureTime").value;
+
+			const data = {
+				userName,
+				date,
+				arrivalTime,
+				departureTime
+			};
+
+			fetch('/api/attendances/update', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			})
+			.then(res => res.text())
+			.then(result => {
+				if (result === 'success') {
+					window.location.href = '/niceadminhome';
+				} else {
+					alert('更新に失敗しました');
+				}
+			})
+			.catch(err => {
+				console.error('送信エラー:', err);
+				alert('通信エラー');
+			});
+		}
+
+		function goBack() {
+			window.location.href = '/niceadminhome';
+		}
+	</script>
+</body>
+</html>

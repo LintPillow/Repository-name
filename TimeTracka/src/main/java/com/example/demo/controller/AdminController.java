@@ -20,15 +20,15 @@ public class AdminController {
 			Model model) {
 
 		if (username.equals("admin") && password.equals("adminpass")) {
-			return "admin/adminhome";
+			return "admin/niceadminhome";
 		} else {
 			model.addAttribute("error", "usernameかpasswordが間違っています");
 			return "/admin/admin";
 		}
 	}
 
-	@RequestMapping("/adminedit")
+	@RequestMapping("/niceadminedit")
 	public String editPunch() {
-		return "admin/adminedit";
+		return "admin/niceadminedit";
 	}
 }

@@ -8,7 +8,7 @@
 <!-- jQuery CDN -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <script type="text/javascript" th:src="@{js/adminhome.js}"></script>
+    <script type="text/javascript" th:src="@{js/niceadminhome.js}"></script>
     <title>管理者画面</title>
     <style>
         /* ボタンを横並びにするためのスタイル */
@@ -20,13 +20,13 @@
 </head>
 <body>
     <h1>Admin</h1>
-   
+
 	<div>
 	    <input type="text" id="nameSearch" placeholder="名前で検索" />
 	    <input type="text" id="dateSearch" placeholder="日付で検索 (例: 2025-07-15)" />
 	    <button onclick="searchData()">検索</button>
 	</div>
-   
+
 
 
     <h1>勤務時間管理</h1>
