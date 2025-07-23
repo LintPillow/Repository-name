@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.ArrivalEntity;
@@ -63,6 +65,20 @@ public class RestApiController {
 		return dummyList;
 	}
 
-//	dummyデータの削除
+//	出勤データの削除
+	@DeleteMapping("api/arrivals/delete/{id}")
+	public List<ArrivalEntity> deleteArrivalPunch(@PathVariable Long id ) {
+		
+		System.out.println("Arrival の一件削除: ID = " + id);
+		return adminService.deleteArrival(id);
+	}
+	
+//	退勤データの削除
+	@DeleteMapping("api/departures/delete/{id}")
+	public List<DepartureEntity> deleteDeparturePunch(@PathVariable Long id) {
+		
+		System.out.println("Departure の一件削除: ID = " + id);
+		return adminService.deleteDepartures(id);
+	}
 
 }
