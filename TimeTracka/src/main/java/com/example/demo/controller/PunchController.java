@@ -44,7 +44,7 @@ public class PunchController {
 		LocalDateTime startOfDay = now.toLocalDate().atStartOfDay();
 		LocalDateTime endOfDay = startOfDay.plusDays(1);
 
-		boolean wasOverwritten = false;
+//		boolean wasOverwritten = false;
 
 		switch (action) {
 		case "arrival" -> {
@@ -57,13 +57,14 @@ public class PunchController {
 				return "punch/punchIndex";
 			}
 
+			boolean wasOverwritten = existing.isPresent();
 			ArrivalEntity arrival = existing.orElse(new ArrivalEntity());
 			arrival.setUserName(userName);
 			arrival.setTimestamp(now);
 			arrivalRepository.save(arrival);
 
-			if (existing.isPresent()) {
-				wasOverwritten = true;
+			if (wasOverwritten) {
+				model.addAttribute("wasOverwritten", "打刻情報を上書きしました");
 			}
 		}
 
@@ -78,13 +79,14 @@ public class PunchController {
 				return "punch/punchIndex";
 			}
 
+			boolean wasOverwritten = existing.isPresent();
 			DepartureEntity departure = existing.orElse(new DepartureEntity());
 			departure.setUserName(userName);
 			departure.setTimestamp(now);
 			departureRepository.save(departure);
 
-			if (existing.isPresent()) {
-				wasOverwritten = true;
+			if (wasOverwritten) {
+				model.addAttribute("wasOverwritten", "打刻情報を上書きしました");
 			}
 		}
 
@@ -96,7 +98,6 @@ public class PunchController {
 
 		model.addAttribute("userName", userName);
 		model.addAttribute("timestamp", now);
-		model.addAttribute("wasOverwritten", "打刻情報を上書きしました"); // 完了画面で使用可能
 		return "punch/punchCompletion";
 	}
 }
