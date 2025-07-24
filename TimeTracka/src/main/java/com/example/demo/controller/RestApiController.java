@@ -68,7 +68,6 @@ public class RestApiController {
 //	出勤データの削除
 	@DeleteMapping("api/arrivals/delete/{id}")
 	public List<ArrivalEntity> deleteArrivalPunch(@PathVariable Long id ) {
-		
 		System.out.println("Arrival の一件削除: ID = " + id);
 		return adminService.deleteArrival(id);
 	}
@@ -76,7 +75,6 @@ public class RestApiController {
 //	退勤データの削除
 	@DeleteMapping("api/departures/delete/{id}")
 	public List<DepartureEntity> deleteDeparturePunch(@PathVariable Long id) {
-		
 		System.out.println("Departure の一件削除: ID = " + id);
 		return adminService.deleteDepartures(id);
 	}
