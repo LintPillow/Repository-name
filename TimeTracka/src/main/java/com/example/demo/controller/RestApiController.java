@@ -15,6 +15,7 @@ import com.example.demo.entity.ArrivalEntity;
 import com.example.demo.entity.DepartureEntity;
 import com.example.demo.service.AdminService;
 
+
 @RestController
 public class RestApiController {
 
@@ -78,5 +79,13 @@ public class RestApiController {
 		System.out.println("Departure の一件削除: ID = " + id);
 		return adminService.deleteDepartures(id);
 	}
+	
+//	@PostMapping("/adminEdit/api/")
+//	public String postMethodName(@RequestBody String entity) {
+//		//TODO: process POST request
+//		
+//		return ;
+//	}
+	
 
 }

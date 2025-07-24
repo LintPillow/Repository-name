@@ -19,7 +19,7 @@ public class AdminController {
 			Model model) {
 
 		if (username.equals("admin") && password.equals("adminpass")) {
-			return "admin/niceadminhome";
+			return "/admin/adminhome";
 		} else {
 			model.addAttribute("error", "usernameかpasswordが間違っています");
 			return "/admin/admin";
@@ -32,13 +32,10 @@ public class AdminController {
 //		return "admin/adminEdit";
 //	}
 	
-	@GetMapping("/adminedit")
-	public String editPunch(@RequestParam("id") Long id, @RequestParam("name")String name, Model model) {
-	    model.addAttribute("id", id);
-	    model.addAttribute("name", name);
-	    
-	    return "admin/adminEdit"; 
-	}
-	
+////	画面遷移用
+//	@GetMapping("/adminedit/")
+//	public String editPunch() {
+//	    return "admin/adminEdit"; 
+//	}
 	
 }

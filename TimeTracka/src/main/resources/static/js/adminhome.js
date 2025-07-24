@@ -112,7 +112,8 @@ function displayData(arrivals, departures) {
 		editBtn.addEventListener("click", () => {
 		    const id = item.id;  // IDを取得（APIのデータに存在する場合）
 		    const name = encodeURIComponent(item.userName);
-		    window.location.href = `adminedit?id=${item.id}&name=${item.userName}`;
+			const [date, arrivalTime] = item.timestamp.split("T");
+		    window.location.href = `adminedit?date=${date}&name=${item.userName}`;
 		});
 
 

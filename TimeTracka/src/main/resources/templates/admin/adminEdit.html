@@ -9,35 +9,11 @@
 </head>
 <body>
     <h1>admin</h1>
-    <h2>打刻編集</h2>
+	<h2 th:text="${name}">名前がここに表示されます</h2>
+	<h2 th:text="${date}">日付がここに表示されます</h2>
 
-    <!-- /admin/updateへpost -->
-    <form th:action="@{/admin/update}" method="post">
-        <!-- 打刻IDを hidden で渡す -->
-        <input type="hidden" name="id" th:value="${record.id}" />
 
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>変更項目</th>
-                    <th>名前</th>
-                    <th>出勤時間</th>
-                    <th>退勤時間</th>
-                    <th>勤務時間</th>
-                    <th>勤務日数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>変更内容入力</td>
-                    <td><input type="text" name="name" th:value="${record.name}" /></td>
-                    <td><input type="datetime-local" name="arrivalTime" th:value="${#dates.format(record.arrivalTime, 'yyyy-MM-dd\'T\'HH:mm')}" /></td>
-                    <td><input type="datetime-local" name="departureTime" th:value="${#dates.format(record.departureTime, 'yyyy-MM-dd\'T\'HH:mm')}" /></td>
-                    <td><input type="text" name="workingHours" th:value="${record.workingHours}" /></td>
-                    <td><input type="number" name="workingDays" th:value="${record.workingDays}" /></td>
-                </tr>
-            </tbody>
-        </table>
+
 
         <br>
         <button type="submit">更新</button>
