@@ -28,4 +28,16 @@ public class AdminService {
 	    public List<DepartureEntity> getAllDepartures() {
 	        return departureRepository.findAll();
 	    }
+	    
+//	    出勤打刻IDで削除したあと、全件取得
+	    public List<ArrivalEntity> deleteArrival(Long id){
+	    	arrivalRepository.deleteById(id);
+	    	return arrivalRepository.findAll();
+	    }
+	    
+//	    退勤打刻IDで削除した後、全件取得
+	    public List<DepartureEntity> deleteDepartures(Long id){
+	    	departureRepository.deleteById(id);
+	    	return departureRepository.findAll();
+	    }
 }
