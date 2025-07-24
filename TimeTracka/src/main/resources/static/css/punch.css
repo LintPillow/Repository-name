@@ -1,14 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
+
 body {
 	background-color: #1d1f26;
 	color: #e0e0e0;
-	font-family: 'M PLUS Rounded 1c';
+	font-family: 'M PLUS Rounded 1c', sans-serif;
 	font-weight: 300;
 	margin: 0;
 	padding: 2rem;
 	line-height: 1.6;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	transform: translateY(-5vh);
 }
 
+.container {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
 h1 {
 	font-size: 2rem;
@@ -18,19 +30,90 @@ h1 {
 	margin-bottom: 1rem;
 }
 
+.analog-clock {
+	width: 120px;
+	height: 120px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.clock-face {
+	width: 100%;
+	height: 100%;
+	border: 2px solid #555;
+	border-radius: 50%;
+	position: relative;
+	background-color: #1e2027;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.hand {
+	position: absolute;
+	bottom: 50%;
+	left: 50%;
+	transform-origin: bottom center;
+	transform: rotate(0deg);
+}
+
+.hand.hour {
+	height: 30px;
+	width: 4px;
+	background-color: #c3ef01;
+	border-radius: 2px;
+}
+
+.hand.minute {
+	height: 45px;
+	width: 3px;
+	background-color: #c8d3dc;
+	border-radius: 2px;
+}
+
+.hand.second {
+	height: 55px;
+	width: 2px;
+	background-color: #ef014c;
+	border-radius: 1px;
+}
+
 .timestamp {
-	font-family: monospace;
-	color: #ef014c;
-	font-family: 'M PLUS Rounded 1c';
-	font-size: 1.2rem;
-	font-weight: bold;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
+	color: #c8d3dc;
+	font-size: 1.4rem;
+	font-weight: 500;
+	padding: 0.4rem 0.8rem;
+	border: 1px solid #444;
+	border-radius: 6px;
+	background-color: #1e2027;
+	animation: subtlePulse 4s infinite ease-in-out;
+	transition: all 0.2s ease;
+	display: inline-block;
+	margin: 0.5rem auto;
 }
 
 form {
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	align-self: center;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
-	max-width: 300px;
+	align-items: center;
+	gap: 1.5rem;
+	max-width: 90vw;
+	background-color: #2b2b3d;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	margin-top: 2rem;
+}
+
+label {
+	align-self: flex-start;
+	font-size: 1.3rem;
+	color: #aaa;
+	margin-bottom: -0.5rem;
+	font-weight: 300;
 }
 
 input[type="text"] {
@@ -39,28 +122,51 @@ input[type="text"] {
 	border: 1px solid #555;
 	background-color: #2b2b3d;
 	color: #f0f0f0;
-	font-family: 'M PLUS Rounded 1c';
 	border-radius: 4px;
+	width: 95%;
+	font-family: 'M PLUS Rounded 1c';
 }
 
 button {
 	padding: 0.6rem;
 	font-size: 2rem;
-	background-color: #c3ef01;
 	border: none;
 	border-radius: 4px;
 	color: #1d1f26;
 	font-family: 'M PLUS Rounded 1c';
 	font-weight: 500;
 	cursor: pointer;
-	transition: background-color 0.2s;
+	transition: transform 0.1s ease-in-out, background-color 0.2s, box-shadow 0.2s;
+	width: 100%;
 }
 
-button:hover {
+button.punch-in {
+	background-color: #c3ef01;
+}
+button.punch-in:hover {
+	background-color: #b1da01;
+	transform: scale(1.05);
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+button.punch-out {
 	background-color: #ef014c;
 }
+button.punch-out:hover {
+	background-color: #d90140;
+	transform: scale(1.05);
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
 
-p[th\\ :if] {
-	color: #ff6b6b;
+.feedback {
+	height: 2rem;
 	margin-top: 1rem;
+	font-size: 1rem;
+	color: #ff6b6b;
+	text-align: center;
+	visibility: hidden;
+}
+
+.feedback.active {
+	visibility: visible;
 }

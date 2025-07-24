@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
+
+body {
+	background-color: #1d1f26;
+	color: #e0e0e0;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
+	font-weight: 300;
+	margin: 0;
+	padding: 2rem;
+	line-height: 1.6;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	transform: translateY(-5vh);
+}
+
+.container {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1 {
+	font-size: 2rem;
+	color: #c3ef01;
+	border-bottom: 2px solid #c3ef01;
+	padding-bottom: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+.timestamp {
+	font-family: 'M PLUS Rounded 1c', sans-serif;
+	color: #c8d3dc;
+	font-size: 1.4rem;
+	font-weight: 500;
+	padding: 0.4rem 0.8rem;
+	border: 1px solid #444;
+	border-radius: 6px;
+	background-color: #1e2027;
+	animation: subtlePulse 4s infinite ease-in-out;
+	transition: all 0.2s ease;
+	display: inline-block;
+	margin: 0.5rem auto;
+}
+
+@keyframes subtlePulse {
+	0% {
+		opacity: 0.85;
+		filter: brightness(1);
+	}
+	50% {
+		opacity: 1;
+		filter: brightness(1.08);
+	}
+	100% {
+		opacity: 0.85;
+		filter: brightness(1);
+	}
+}
+
+button.return-button {
+	width: auto;
+	font-size: 1.4rem;
+	padding: 0.6rem 1.5rem;
+	background-color: #c8c8ff;
+	color: #1d1f26;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-family: 'M PLUS Rounded 1c';
+	font-weight: 500;
+	transition: transform 0.1s ease-in-out, background-color 0.2s, box-shadow 0.2s;
+}
+
+button.return-button:hover {
+	background-color: #a0a0ff;
+	transform: scale(1.08);
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.feedback {
+	color: #ff6b6b;
+	text-align: center;
+	font-size: 1rem;
+	margin-top: 1rem;
+}
+
+.username-display {
+	font-size: 1.5rem;
+	color: #c8d3dc;
+	margin-bottom: 1rem;
+}
+
+.completion-box {
+	background-color: #2b2b3d;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	width: 300px;
+	margin-top: 2rem;
+}
