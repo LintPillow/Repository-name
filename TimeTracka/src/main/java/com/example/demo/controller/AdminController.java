@@ -4,10 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class AdminController {
 
 	@GetMapping("/admin")
@@ -20,15 +22,10 @@ public class AdminController {
 			Model model) {
 
 		if (username.equals("admin") && password.equals("adminpass")) {
-			return "admin/adminhome";
+			return "/admin/adminhome";
 		} else {
 			model.addAttribute("error", "usernameかpasswordが間違っています");
 			return "/admin/admin";
 		}
-	}
-
-	@RequestMapping("/adminedit")
-	public String editPunch() {
-		return "admin/adminedit";
 	}
 }

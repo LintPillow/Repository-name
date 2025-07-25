@@ -4,41 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" th:src="@{js/adminhome.js}"></script>
 </head>
 <body>
     <h1>admin</h1>
-    <h2>打刻編集</h2>
+	<form action="/edit/content" method="post">
+	<h2 th:text="${name}">名前がここに表示されます</h2>
+	<h2 th:text="${date}">日付がここに表示されます</h2>
+	<p>
+		<input type="hidden" name ="name" th:value="${name}">
+		<input type="hidden" name ="date" th:value="${date}">
+		出勤時間:<input type="time" name="arrivalTime" th:value="'09:00'">
+	</p>
+	<p>
+		退勤時間:<input type="time" name="departureTime" th:value="'17:00'">
 
-    <!-- /admin/updateへpost -->
-    <form th:action="@{/admin/update}" method="post">
-        <!-- 打刻IDを hidden で渡す -->
-        <input type="hidden" name="id" th:value="${record.id}" />
+	</p>
 
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>変更項目</th>
-                    <th>名前</th>
-                    <th>出勤時間</th>
-                    <th>退勤時間</th>
-                    <th>勤務時間</th>
-                    <th>勤務日数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>変更内容入力</td>
-                    <td><input type="text" name="name" th:value="${record.name}" /></td>
-                    <td><input type="datetime-local" name="arrivalTime" th:value="${#dates.format(record.arrivalTime, 'yyyy-MM-dd\'T\'HH:mm')}" /></td>
-                    <td><input type="datetime-local" name="departureTime" th:value="${#dates.format(record.departureTime, 'yyyy-MM-dd\'T\'HH:mm')}" /></td>
-                    <td><input type="text" name="workingHours" th:value="${record.workingHours}" /></td>
-                    <td><input type="number" name="workingDays" th:value="${record.workingDays}" /></td>
-                </tr>
-            </tbody>
-        </table>
 
         <br>
         <button type="submit">更新</button>
     </form>
+
+	<script>
+		function validateForm(){
+			var arrivalTime = document.getElementById("arrivalTime").value;
+			var departureTime = document.getElementById("departureTime").value;
+			var errorMessage = document.getElementById("errorMessage")
+			var arrival = new Date("1970-01-01" + arrivalTime + "Z");
+			var departure = new Date("1970-01-01" + departureTime +"Z");
+
+			if(arrival >= depature){
+				errorMessage.style.display = "inline";
+				return false
+			}
+			else {
+				errorMessage.style.display = "none";
+				return true;
+			}
+		}
+	</script>
 </body>
 </html>

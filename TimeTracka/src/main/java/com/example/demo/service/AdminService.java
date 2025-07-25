@@ -15,29 +15,28 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdminService {
 
-    private final ArrivalRepository arrivalRepository;
-    private final DepartureRepository departureRepository;
-    
-    	
-	    public List<ArrivalEntity> getAllArrivals() {
-	    	System.out.println(arrivalRepository.findAll());
-	        return arrivalRepository.findAll(); 
-	    }
-	    
-	    // 退勤打刻 全件取得
-	    public List<DepartureEntity> getAllDepartures() {
-	        return departureRepository.findAll();
-	    }
-	    
+	private final ArrivalRepository arrivalRepository;
+	private final DepartureRepository departureRepository;
+
+	public List<ArrivalEntity> getAllArrivals() {
+		System.out.println(arrivalRepository.findAll());
+		return arrivalRepository.findAll();
+	}
+
+	// 退勤打刻 全件取得
+	public List<DepartureEntity> getAllDepartures() {
+		return departureRepository.findAll();
+	}
+
 //	    出勤打刻IDで削除したあと、全件取得
-	    public List<ArrivalEntity> deleteArrival(Long id){
-	    	arrivalRepository.deleteById(id);
-	    	return arrivalRepository.findAll();
-	    }
-	    
+	public List<ArrivalEntity> deleteArrival(Long id) {
+		arrivalRepository.deleteById(id);
+		return arrivalRepository.findAll();
+	}
+
 //	    退勤打刻IDで削除した後、全件取得
-	    public List<DepartureEntity> deleteDepartures(Long id){
-	    	departureRepository.deleteById(id);
-	    	return departureRepository.findAll();
-	    }
+	public List<DepartureEntity> deleteDepartures(Long id) {
+		departureRepository.deleteById(id);
+		return departureRepository.findAll();
+	}
 }
