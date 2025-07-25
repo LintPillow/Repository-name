@@ -1,48 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-
 <head>
 <meta charset="UTF-8">
 <title>打刻画面</title>
 <link rel="stylesheet" th:href="@{/css/punch.css}">
-
 </head>
 
 <body>
-	<script>
-		function updateClock() {
-			const now = new Date()
-			const formatted = now.toLocaleString("ja-JP", {
-				hour12 : false
-			})
-			document.getElementById("clock").textContent = formatted
-		}
+	<div class="container">
+		<h1>打刻画面</h1>
+		<div class="analog-clock">
+			<div class="clock-face">
+				<div class="hand hour" id="hour-hand"></div>
+				<div class="hand minute" id="minute-hand"></div>
+				<div class="hand second" id="second-hand"></div>
+			</div>
+		</div>
 
-		setInterval(updateClock, 1000)
-		updateClock()
-	</script>
+		<p>現在時刻</p>
+		<div id="clock" class="timestamp"></div>
 
-	<H1>打刻画面</H1>
-	<p>現在時刻</p>
-	<div id="clock" class="timestamp"></div>
-	<form th:action="@{/}" method="post">
-		<input type="text" name="userName" placeholder="名前を入力" th:value="${userName}">
-		<input type="hidden" name="forceType" th:value="${forceType}">
-		<button type="submit" name="action" value="arrival">出勤</button>
-		<button type="submit" name="action" value="departure">退勤</button>
-	</form>
+		<form th:action="@{/}" method="post">
+			<label for="username">名前</label> <input id="username" type="text"
+				name="userName" placeholder="名前を入力" th:value="${userName}">
 
-	<script>
-		if (window.location.search.includes("retry=true")) {
-			document.getElementById("forceFlag").value = "true";
-		}
-	</script>
-	<!-- エラーメッセージを表示 -->
-	<p th:if="${error}" th:text="${error}" style="color: red;"></p>
+			<input type="hidden" name="forceType" th:value="${forceType}"
+				id="forceFlag">
+
+			<button class="punch-in" type="submit" name="action" value="arrival">出勤</button>
+			<button class="punch-out" type="submit" name="action"
+				value="departure">退勤</button>
+		</form>
+
+		<div class="feedback" th:classappend="${error} ? ' active'" th:text="${error}"></div>
+
+	</div>
+<script th:src="@{/js/punch.js}"></script>
 </body>
-
 </html>
-
-
-
-
