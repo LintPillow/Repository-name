@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -22,4 +23,8 @@ public interface ArrivalRepository extends JpaRepository<ArrivalEntity, Long> {
 	void deleteByUserNameAndDate(@Param("userName") String userName,
 	                             @Param("start") LocalDateTime start,
 	                             @Param("end") LocalDateTime end);
+	
+	@Query("SELECT a FROM ArrivalEntity a WHERE a.userName = :userName AND DATE(a.timestamp) = :date")
+	Optional<ArrivalEntity> findByUserNameAndDate(@Param("userName") String userName, 
+	                                               @Param("date") LocalDate date);
 }
