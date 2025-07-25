@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" th:src="@{js/adminhome.js}"></script>
+</head>
+<body>
+    <h1>admin</h1>
+	<form action="/edit/content" method="post">
+	<h2 th:text="${name}">名前がここに表示されます</h2>
+	<h2 th:text="${date}">日付がここに表示されます</h2>
+	<p>
+		<input type="hidden" name ="name" th:value="${name}">
+		<input type="hidden" name ="date" th:value="${date}">
+		出勤時間:<input type="time" name="arrivalTime" th:value="'09:00'">
+	</p>
+	<p>
+		退勤時間:<input type="time" name="departureTime" th:value="'17:00'">
+
+	</p>
+
+
+        <br>
+        <button type="submit">更新</button>
+    </form>
+
+	<script>
+		function validateForm(){
+			var arrivalTime = document.getElementById("arrivalTime").value;
+			var departureTime = document.getElementById("departureTime").value;
+			var errorMessage = document.getElementById("errorMessage")
+			var arrival = new Date("1970-01-01" + arrivalTime + "Z");
+			var departure = new Date("1970-01-01" + departureTime +"Z");
+
+			if(arrival >= depature){
+				errorMessage.style.display = "inline";
+				return false
+			}
+			else {
+				errorMessage.style.display = "none";
+				return true;
+			}
+		}
+	</script>
+</body>
+</html>

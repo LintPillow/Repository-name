@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,10 +23,10 @@ public class ArrivalEntity {
 	// 打刻id
 	private Long id;
 	// ユーザー名
+	@Column(name = "USERNAME")
 	private String userName;
 
 	// 出勤時間
-	@Column(name = "date_time", columnDefinition = "TIMESTAMP")
+	@Column(name = "timestamp", columnDefinition = "TIMESTAMP")
 	private LocalDateTime timestamp;
-
 }

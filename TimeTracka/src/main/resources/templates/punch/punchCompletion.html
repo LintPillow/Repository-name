@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" th:href="@{/css/completion.css}">
+<title>打刻完了画面</title>
+</head>
+
+<body>
+	<div class="container">
+	<h1>打刻完了</h1>
+
+	<div class="completion-box">
+		<p th:if="${wasOverwritten}" th:text="${wasOverwritten}" class="feedback active"></p>
+		<p th:text="'名前: ' + ${userName}" class="username-display"></p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<span style="font-size: 1.5rem; color: #c8d3dc;">時刻</span>
+			<p class="timestamp" th:text="${#temporals.format(timestamp, 'yyyy/MM/dd HH:mm:ss')}"></p>
+		</div>
+		<form th:action="@{/}" method="get" style="width: 100%;">
+			<button type="submit" class="return-button full-width">打刻ページへ戻る</button>
+		</form>
+	</div>
+	</div>
+</body>
