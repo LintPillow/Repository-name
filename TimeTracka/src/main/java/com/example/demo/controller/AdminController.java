@@ -6,8 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.repository.ArrivalRepository;
+
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class AdminController {
+	private final ArrivalRepository arrivalRepository;
 
 	@GetMapping("/admin")
 	public String showloginForm() {
@@ -32,10 +38,8 @@ public class AdminController {
 //		return "admin/adminEdit";
 //	}
 	
-////	画面遷移用
-//	@GetMapping("/adminedit/")
-//	public String editPunch() {
-//	    return "admin/adminEdit"; 
-//	}
+
+
+
 	
 }

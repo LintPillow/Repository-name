@@ -28,10 +28,10 @@ public class EditController {
     public String edit(@RequestParam String name, @RequestParam String date , org.springframework.ui.Model model) {
 		model.addAttribute("name" , name);
 		model.addAttribute("date" , date);
-	 	return "/admin/adminEdit";
+	 	return "admin/adminEdit";
 	 }
 	
-	@PostMapping("/adminedit/content")
+	@PostMapping("/edit/content")
 	public String update(@ModelAttribute EditForm form) {
 		
 //		htmlからpostされたデータを各データ型に成形
@@ -53,10 +53,11 @@ public class EditController {
 	    	departure.setTimestamp(departureDateTime);
 	    	editService.saveDeparture(departure);
 	    });
-	    return "redirect:/admin/adminhome";
+	    return "admin/adminhome";
 	}
 	
-	
+
+
 	
 	 
 }
