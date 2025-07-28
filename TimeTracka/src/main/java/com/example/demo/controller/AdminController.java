@@ -22,10 +22,10 @@ public class AdminController {
 			Model model) {
 
 		if (username.equals("admin") && password.equals("adminpass")) {
-			return "/admin/adminhome";
+			return "admin/adminhome";
 		} else {
 			model.addAttribute("error", "usernameかpasswordが間違っています");
-			return "/admin/admin";
+			return "admin/admin";
 		}
 	}
 }
