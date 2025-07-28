@@ -3,47 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script type="text/javascript" th:src="@{js/adminhome.js}"></script>
+    <title>打刻編集</title>
+    <link rel="stylesheet" th:href="@{/css/adminedit.css}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <h1>admin</h1>
-	<form action="/edit/content" method="post">
-	<h2 th:text="${name}">名前がここに表示されます</h2>
-	<h2 th:text="${date}">日付がここに表示されます</h2>
-	<p>
-		<input type="hidden" name ="name" th:value="${name}">
-		<input type="hidden" name ="date" th:value="${date}">
-		出勤時間:<input type="time" name="arrivalTime" th:value="'09:00'">
-	</p>
-	<p>
-		退勤時間:<input type="time" name="departureTime" th:value="'17:00'">
+    <div class="container">
+        <h1>打刻編集</h1>
 
-	</p>
+        <form action="/edit/content" method="post" onsubmit="return validateForm()">
+            <h2 class="user-name" th:text="${name}">名前表示</h2>
+            <h2 class="date" th:text="${date}">日付表示</h2>
 
+            <input type="hidden" name="name" th:value="${name}">
+            <input type="hidden" name="date" th:value="${date}">
 
-        <br>
-        <button type="submit">更新</button>
-    </form>
+            <div class="form-group">
+                <label for="arrivalTime">出勤時間:</label>
+                <input type="time" id="arrivalTime" name="arrivalTime" th:value="'09:00'">
+            </div>
 
-	<script>
-		function validateForm(){
-			var arrivalTime = document.getElementById("arrivalTime").value;
-			var departureTime = document.getElementById("departureTime").value;
-			var errorMessage = document.getElementById("errorMessage")
-			var arrival = new Date("1970-01-01" + arrivalTime + "Z");
-			var departure = new Date("1970-01-01" + departureTime +"Z");
+            <div class="form-group">
+                <label for="departureTime">退勤時間:</label>
+                <input type="time" id="departureTime" name="departureTime" th:value="'17:00'">
+            </div>
 
-			if(arrival >= depature){
-				errorMessage.style.display = "inline";
-				return false
-			}
-			else {
-				errorMessage.style.display = "none";
-				return true;
-			}
-		}
-	</script>
+            <p id="errorMessage" class="error-message" style="display:none;">
+                出勤時間は退勤時間より前に設定してください
+            </p>
+
+            <button type="submit" class="update-btn">更新</button>
+        </form>
+
+        <button class="back-btn" onclick="window.location.href='/adminhome'">一覧に戻る</button>
+    </div>
+
+    <script>
+        function validateForm() {
+            const arrival = document.getElementById("arrivalTime").value;
+            const departure = document.getElementById("departureTime").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (!arrival || !departure || arrival >= departure) {
+                errorMessage.style.display = "block";
+                return false;
+            }
+            errorMessage.style.display = "none";
+            return true;
+        }
+    </script>
 </body>
 </html>

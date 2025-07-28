@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
+
+body {
+    background-color: #1d1f26;
+    color: #e0e0e0;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 2rem;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transform: translateY(-6.5vh);
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #c3ef01;
+    border-bottom: 2px solid #c3ef01;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+form {
+    width: 300px;
+    background-color: #2b2b3d;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.3rem;
+    color: #aaa;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #555;
+    background-color: #2b2b3d;
+    color: #f0f0f0;
+    border-radius: 4px;
+    width: 100%;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 0.6rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 4px;
+    color: #1d1f26;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 500;
+    background-color: #c8c8ff;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out, background-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #a0a0ff;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+p[th\\:if] {
+    color: #ff6b6b;
+    margin-top: 1rem;
+}
