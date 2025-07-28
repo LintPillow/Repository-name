@@ -56,6 +56,11 @@ public class EditController {
 	    return "admin/adminhome";
 	}
 
+	@GetMapping("/adminhome")
+    public String adminHome() {
+        return "admin/adminhome";
+    }
+
 
 
 
