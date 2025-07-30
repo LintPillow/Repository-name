@@ -19,7 +19,6 @@ public class AdminService {
 	private final DepartureRepository departureRepository;
 
 	public List<ArrivalEntity> getAllArrivals() {
-		System.out.println(arrivalRepository.findAll());
 		return arrivalRepository.findAll();
 	}
 

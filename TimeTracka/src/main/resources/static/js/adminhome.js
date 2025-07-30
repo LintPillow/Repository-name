@@ -11,7 +11,6 @@ function fetchAndMergeData(arrivalsUrl, departuresUrl, tableId) {
 		.then(([arrivalsData, departuresData]) => {
 			arrivals = arrivalsData
 			departures = departuresData
-			// 一旦ここでも降順にしておくと初回描画が確実
 			arrivals.sort((a, b) => b.timestamp.localeCompare(a.timestamp))
 			displayData(arrivals, departures) // テーブル更新
 		})
