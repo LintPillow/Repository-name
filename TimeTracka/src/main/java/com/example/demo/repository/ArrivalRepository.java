@@ -12,12 +12,16 @@ import com.example.demo.entity.ArrivalEntity;
 
 public interface ArrivalRepository extends JpaRepository<ArrivalEntity, Long> {
 	@Query("SELECT a FROM ArrivalEntity a WHERE a.userName = :userName AND a.timestamp BETWEEN :start AND :end")
-	Optional<ArrivalEntity> findByUserNameAndDate(@Param("userName") String userName,
-			@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
+	Optional<ArrivalEntity> findByUserNameAndDate(
+			@Param("userName") String userName,
+			@Param("start") LocalDateTime start,
+			@Param("end") LocalDateTime end);
 
 	@Modifying
 	@Query("DELETE FROM ArrivalEntity a WHERE a.userName = :userName AND a.timestamp BETWEEN :start AND :end")
-	void deleteByUserNameAndDate(@Param("userName") String userName, @Param("start") LocalDateTime start,
+	void deleteByUserNameAndDate(
+			@Param("userName") String userName,
+			@Param("start") LocalDateTime start,
 			@Param("end") LocalDateTime end);
 
 }
